@@ -1,7 +1,7 @@
 ## FinalProject
 
 ### Project Description
-Basic flashcard app. 
+//
 
 ## Specfic tasks completed
 - [X] //
