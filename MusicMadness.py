@@ -20,11 +20,11 @@ def billboard_list():
             artist= a.text.strip()
             lst.append(artist)
     return lst
-    
-#throughout the rest of the project, simply call billboard_list() to access the list of artists
 
-#this goes at bottom of page
-billboard_list()
+list_of_artists = billboard_list()   
+#throughout the rest of the project, list_of_artists is the global variable for all 100 artists 
+
+
 
 
 
