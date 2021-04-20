@@ -24,18 +24,49 @@ def billboard_list():
     data = soup.find('div', class_ = 'chart-details')
     rows = data.find_all('div', class_  = "chart-list-item")
     
-    for row in rows:
-        art = row.find_all('span', class_ = "chart-list-item__title-text")
-        for a in art:
-            artist= a.text.strip()
-            lst.append(artist)
-    return lst
 
 list_of_artists = billboard_list()   
 #throughout the rest of the project, list_of_artists is the global variable for all 100 artists 
 >>>>>>> 7a70d5f6f4d1c190544c8c7163179eb2de25bdcc
 
 
+# converts artist name to the url ending in the Genius url format
+# ex Ariana-grande, Lady-gaga, Rihanna, etc.
+def reformat(artist):
+    reformatted_artist = artist
+    #Makes first char upper case and rest of string lower case if two words
+    reformatted_artist = reformatted_artist[0].upper() + reformatted_artist[1:].lower()
+    #adds the - that url has
+    reformatted_artist = reformatted_artist.replace(' ', '-')
+    
+
+# Get the artist with most likes from Genius website from artists from billboard
+# This will be done by collecting the number of likes that artist got on their page/artist description
+def artist_likes():
+    artists_list = billboard_list() #list of artists from which to gather like data
+    url = 'https://genius.com/artists/'
+    likes_d = {}
+    
+    for artist in artists_list:
+        url += reformat(artist) #adds artist name to the url ending in the Genius url format
+        # ex. on genius, Ariana-grande, Lady-gaga, Rihanna, etc.
+        r = requests.get(url)
+        soup = BeautifulSoup(r.text, 'html.parser')
+
+    return likes_d
+
+# from the dict of artists will get the most liked artist
+def most_likes():
+    
+    return sorted(artist_likes(), reverse = True)
+
+# will import like information into the database
+def import_likes():
+    pass
+
+# creates 2 graphs from the Genius Lyrics info and iTunes database
+def graphics():
+    pass
 
 
 <<<<<<< HEAD
