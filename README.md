@@ -1,7 +1,13 @@
 ## FinalProject
 
 ### Project Description
-//
+We will be collecting information about the artists on the Billboard Artist 100 from the Genius Lyrics website and the iTunes API. We will scrape the Billboard artist 100 website to create a list of all 100 artists, and then will use that list to complete the rest of our project. 
+
+From the iTunes API, using the artists chosen above, we will be collecting their names, the number of songs they have on iTunes, and the number of albums they have on iTunes. In the database, we will use this information to calculate the artist with the most songs and the artists with the most albums. We will then create graphs of this information using the Seaborn Data visualization package
+
+
+From the Genius Lyrics Website, we will calculate which of the 100 artists has the most likes on their Genius page. This will be done by collecting the number of likes that artist got on their page/the number of likes the artist description on their page got and saving that to a database. We will then use that information to figure out which artist got the most likes. Using the Seaborn Data visualization package, we will then create graphs of the artists with the most likes as well as a graph of the artist with most likes vs the artist with most songs, which will use information from both the iTunes and the Genius databases.
+
 
 ## Specfic tasks completed
 - [ ] Accessed at least 2 APIs or 1 API and 1 Website
