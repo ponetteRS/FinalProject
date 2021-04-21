@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 import re
 import requests
 import unittest
-<<<<<<< HEAD
 # import sqlite3
 # import json
 # import os
@@ -11,7 +10,6 @@ import unittest
 # Project Name: Music Madness
 # Names: Ponette Rubio
 #
-=======
 
 #Names of Partners: Ponette Rubio and Jenny Siegel
 
@@ -27,7 +25,6 @@ def billboard_list():
 
 list_of_artists = billboard_list()   
 #throughout the rest of the project, list_of_artists is the global variable for all 100 artists 
->>>>>>> 7a70d5f6f4d1c190544c8c7163179eb2de25bdcc
 
 
 # converts artist name to the url ending in the Genius url format
@@ -48,10 +45,13 @@ def artist_likes():
     likes_d = {}
     
     for artist in artists_list:
-        url += reformat(artist) #adds artist name to the url ending in the Genius url format
-        # ex. on genius, Ariana-grande, Lady-gaga, Rihanna, etc.
-        r = requests.get(url)
-        soup = BeautifulSoup(r.text, 'html.parser')
+        try:
+            url += reformat(artist) #adds artist name to the url ending in the Genius url format
+            # ex. on genius, Ariana-grande, Lady-gaga, Rihanna, etc.
+            r = requests.get(url)
+            soup = BeautifulSoup(r.text, 'html.parser')
+        except:
+            print('')
 
     return likes_d
 
@@ -69,8 +69,5 @@ def graphics():
     pass
 
 
-<<<<<<< HEAD
 # tests
-=======
->>>>>>> 7a70d5f6f4d1c190544c8c7163179eb2de25bdcc
 
