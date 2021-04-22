@@ -1,29 +1,13 @@
 from bs4 import BeautifulSoup
-import re
 import requests
 import unittest
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 import json
-=======
-<<<<<<< HEAD
->>>>>>> 8551b68dc69f6a5a3ad391351e65a4a8f7c4bd34
-# import sqlite3
-# import json
-# import os
+import sqlite3
+import os
 
-#
 # Project Name: Music Madness
 # Names: Ponette Rubio
-#
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 05a3fd14d22a2442de0639529dda63d3a37e27a3
->>>>>>> 8551b68dc69f6a5a3ad391351e65a4a8f7c4bd34
-
-#Names of Partners: Ponette Rubio and Jenny Siegel
+# Names of Partners: Ponette Rubio and Jenny Siegel
 
 #Creates a list of 100 artists using the Billboard Artist 100 Website
 def billboard_list():
@@ -34,8 +18,6 @@ def billboard_list():
     data = soup.find('div', class_ = 'chart-details')
     rows = data.find_all('div', class_  = "chart-list-item")
     
-
-<<<<<<< HEAD
 #Creates JSON object of up to 25 songs per artist
 def iTunes_songs(artist):
     url= 'https://itunes.apple.com/search'
@@ -56,7 +38,7 @@ def iTunes_albums(artist):
     return data
     
 #Saves album data to a database
-=======
+
 list_of_artists = billboard_list()   
 #throughout the rest of the project, list_of_artists is the global variable for all 100 artists 
 
@@ -79,21 +61,38 @@ def artist_likes():
     likes_d = {}
     
     for artist in artists_list:
-        try:
+        try: # if requests.status_code = 200 -< do we need that if using a try and except?
             url += reformat(artist) #adds artist name to the url ending in the Genius url format
-            # ex. on genius, Ariana-grande, Lady-gaga, Rihanna, etc.
             r = requests.get(url)
             soup = BeautifulSoup(r.text, 'html.parser')
+            data = soup.find('div', class_ = 'voting-total square_button square_button--transparent voting-total--positive')
+            temp = data.find('div', class_  = 'voting-total--positive')
+            likes_d[artist] = temp
         except:
-            print('')
-
+            likes_d[artist] = 0 #artists not on Genius get no likes
+ 
     return likes_d
 
 # from the dict of artists will get the most liked artist
 def most_likes():
+    d = sorted(artist_likes(), reverse = True) #dict from most likes to least likes
+    top = d[0]
+    return top
+
+# returns list of top 10 artists
+def top_ten():
+    top_ten = []
+    ordered_artists_d = sorted(artist_likes(), reverse = True)
+    i = 0
     
-    return sorted(artist_likes(), reverse = True)
->>>>>>> 05a3fd14d22a2442de0639529dda63d3a37e27a3
+    for artist in ordered_artists_d:
+        if i < 10:
+            top_ten.append(artist)
+            i += 1
+        else:
+            return top_ten
+
+    return top_ten
 
 # will import like information into the database
 def import_likes():
@@ -110,5 +109,13 @@ def graphics():
 #        songs = iTunes_songs(artist)
 #        albums = iTunes_albums(artist)
 
-# tests
+
+# tests for reformat(artist)
+# reformatted_artist = 'Ariana Grande'
+# reformatted_artist = 'Rihanna'
+# reformatted_artist = reformatted_artist[0].upper() + reformatted_artist[1:].lower()
+# reformatted_artist = reformatted_artist.replace(' ', '-')
+# print(reformatted_artist)
+
+print(artist_likes())
 
