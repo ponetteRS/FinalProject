@@ -4,6 +4,7 @@ import unittest
 import json
 import sqlite3
 import os
+import matplotlib.pyplot as plt
 
 # Project Name: Music Madness
 # Names: Ponette Rubio
@@ -17,6 +18,12 @@ def billboard_list():
     lst = []
     data = soup.find('div', class_ = 'chart-details')
     rows = data.find_all('div', class_  = "chart-list-item")
+    for row in rows:
+         art = row.find_all('span', class_ = "chart-list-item__title-text")
+         for a in art:
+             artist= a.text.strip()
+             lst.append(artist)
+    return lst
     
 #Creates JSON object of up to 25 songs per artist
 def iTunes_songs(artist):
@@ -59,15 +66,16 @@ def artist_likes():
     artists_list = billboard_list() #list of artists from which to gather like data
     url = 'https://genius.com/artists/'
     likes_d = {}
+    #can order by when doing a select and just use database instead
     
     for artist in artists_list:
         try: # if requests.status_code = 200 -< do we need that if using a try and except?
             url += reformat(artist) #adds artist name to the url ending in the Genius url format
             r = requests.get(url)
             soup = BeautifulSoup(r.text, 'html.parser')
-            data = soup.find('div', class_ = 'voting-total square_button square_button--transparent voting-total--positive')
-            temp = data.find('div', class_  = 'voting-total--positive')
-            likes_d[artist] = temp
+            data = soup.find('div', class_ = 'voting-total')
+            likes_d[artist] = data
+            #when we add to the database
         except:
             likes_d[artist] = 0 #artists not on Genius get no likes
  
