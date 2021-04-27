@@ -76,7 +76,8 @@ artist_weeks()
 - returns nothing
 
 top_ten()
-- TO BE FIXED- THIS IS WHERE MISTAKEN CALCULATIONS BEGIN
+- takes in no inputs
+- returns a dictionary
 
 most_music()
 - takes in the database cursor object and the database connection object as inputs
@@ -94,8 +95,8 @@ pie()
 - has no inputs
 - creates a pie chart of the number of weeks the top ten artists currently on the Billboard Artist 100 Charts have remained on the Billboard Artist 100 Charts 
 
-pie_two(data)
-- takes in the output of the function most_music(cur, conn)
+pie_two()
+- takes in the output of the function most_music() (a dictionary of each album in the albums table, and the number of songs it has in the songs table (if that is more than 0)) as input
 - creates a pie chart of the number of the albums in relation to the number of songs
 
 main()
