@@ -114,7 +114,8 @@ Date | Issue Description | Location of Resource | Result |
 4/26 | Could not scrape info from Genius Webpage; Struggling to figure out Limit 25 table constraint | Office Hours w/ AJ | Issue resolved- Opted to use Billboard Website instead of Genius, limited table uploads to be 25 at a time successfully | 
 
 
-Vizualizations:
+## Vizualizations:
+
 * NOTE: The Billboard Artist 100 is updated daily. As a result, it is likely that the datapoints on the vizualizations would be different than the ones shown here if you were to run our code again *
 
 iTunes API Scatterplot:
