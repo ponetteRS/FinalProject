@@ -25,7 +25,7 @@ From the Billboard Website, Our Goals Were:
 ## Instructions for Running the Code
 Everything should be set up when the files are downloaded. To run the code, simply:
 1. Hit the play button- this will upload the first 25 rows to the database and produce our 3 vizualizations
-2. Hit the play button 3 more times- each time this is done, 25 new rows of unique data will be uploaded to each table. After running th code a total of 4 times, there should be 100 rows in each table.
+2. Hit the play button 3 more times- each time this is done, 25 new rows of unique data will be uploaded to each table. After running the code a total of 4 times, there should be 100 rows in each table.
 3. After the code has been ran 4 times, our csv file (INSERT NAME HERE) will be fully populated, and will match the csv we turned in in our Zip file project submission.
 
 ## Code Documentation
