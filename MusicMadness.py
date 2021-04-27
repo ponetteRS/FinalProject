@@ -96,6 +96,7 @@ def albums_table(cur, conn, lst):
 
 # Get the artists names and the number of weeks they have been on the Billboard Artist 100, and save that to a table called artistWeeks
 def artist_weeks(cur, conn):
+    # cur.execute("CREATE TABLE IF NOT EXISTS artistWeeks (artist TEXT PRIMARY KEY, num_weeks INTEGER)")
     cur.execute("CREATE TABLE IF NOT EXISTS artistWeeks (artist TEXT PRIMARY KEY, num_weeks INTEGER)")
     count = 0
     
@@ -144,40 +145,6 @@ def top_ten():
     temp_d = sorted(d.items(), key=lambda x:x[1], reverse=True)
     return temp_d[:10]
 
-#Of the 10 most popular artists calculate the number of songs from the Songs table that are on 
-#albums in the Albums table. If there are no songs in the songs table on an album in the albums table, that album is ignored.
-#These calculations are solely meant to measure when there is overlap between the 2 tables. 
-# Also gets an average of weeks from the top 10 most weeks on the charts
-def most_music(cur, conn):
-
-    cur.execute("SELECT Songs.artist, Songs.song_title, Albums.album_title FROM Songs JOIN Albums WHERE Songs.album = Albums.album_title")
-    music = cur.fetchall()
-
-    music_data = {}
-    for i in range(len(music)):
-        if music[i-1][2] == music[i][2]:
-            music_data[music[i][2]] = music_data.get(music[i][2], 0) + 1
-        else:
-            continue
-    
-    cur.execute("SELECT artist, num_weeks FROM artistWeeks WHERE num_weeks ORDER BY num_weeks DESC")
-    top_lst = cur.fetchall()
-    average = 0
-    s = 0
-    for tup in top_lst[:10]:
-         s += tup[1]
-    average = s/10
-
-    with open('Music_Calculations.csv','w') as f:
-        f.write('Of the albums in the Albums table: \n\n')
-        for album in music_data.items():
-            f.write(album[0] + " has " + str(album[1]) + ' song(s) in the Songs table \n')  
-
-        f.write('\n\n\n\nTop 10 artists based on weeks on charts vs average weeks in the top 10: \n\n')
-        for tup in top_lst[:10]:
-            f.write(tup[0] + " has " + str(tup[1]) + ' weeks on Billboard compared to ' + str(average) + ' the top 10 average \n') 
-    f.close()
-    return music_data 
 
 #Create a scatterplot of the number of songs in the Songs table that are on albums in the Albums table
 def scatterplot(data):
@@ -328,8 +295,8 @@ def main():
     songs_table(cur, conn, songs)
     albums_table(cur, conn, albums)
     music_data = most_music(cur, conn)
+    artist_weeks(cur, conn) #move to back if neccesary
     scatterplot(music_data)
-    artist_weeks(cur, conn)
     pie()
     pie_two(music_data)
     
