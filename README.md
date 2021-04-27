@@ -7,16 +7,18 @@ Our project goals have changed significantly since the project began. Initially,
 After lots of troubleshooting and research, our project goals were as follows:
 
 From the iTunes API, Our Goals Were:
--To test whether iTunes filters all their searches the same way, specifically: in a search for just songs, does iTunes simply return the top songs from the most popular albums, or is a different method used?
-  -To test this theory, we sought to find and calculate the overlap between iTunes searches for only songs and iTunes searches for only albums (using the iTunes API)
-  -To do this, our goal was to create 2 database tables: One of the data returned in an iTunes search for only an artist's songs, and another of the data returned in an iTunes search for only an artist's albums
-  -We then sought to make a scatterplot of the overlap between the searches, to see if any trends emerged
+
+- To test whether iTunes filters all their searches the same way, specifically: in a search for just songs, does iTunes simply return the top songs from the most popular albums, or is a different method used?
+  - To test this theory, we sought to find and calculate the overlap between iTunes searches for only songs and iTunes searches for only albums (using the iTunes API)
+  - To do this, our goal was to create 2 database tables: One of the data returned in an iTunes search for only an artist's songs, and another of the data returned in an iTunes search for only an artist's albums
+  - We then sought to make a scatterplot of the overlap between the searches, to see if any trends emerged
 
 From the Billboard Website, Our Goals Were:
--To find the top 10 artists on the Billboard Artist 100 Charts, as well as how many weeks they had each been on the charts (using BeautifulSoup to scrape information from the Billboard website)
--To create a database table of this information
--To use this information to create a pie chart of the top 10 artists and the number of weeks they had remained on the charts
--To use this information to create a second pie chart, this time of the ......
+
+- To find the top 10 artists on the Billboard Artist 100 Charts, as well as how many weeks they had each been on the charts (using BeautifulSoup to scrape information from the Billboard website)
+- To create a database table of this information
+- To use this information to create a pie chart of the top 10 artists and the number of weeks they had remained on the charts
+- To use this information to create a second pie chart, this time of the ......
 
 
 ## Specfic tasks completed
