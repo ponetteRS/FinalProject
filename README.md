@@ -30,7 +30,44 @@ Everything should be set up when the files are downloaded. To run the code, simp
 
 ## Code Documentation
 
+billboard_list()
+- takes in no inputs
+- scrapes the artists' names off the Billboard Artist 100 Website using BeautifulSoup 
+- returns a list of all the artist's names on the Billboard Artist 100 Website
 
+setUpDatabase(db_name)
+- takes the name of a database as input
+- creates the database
+- returns the database cursor (cur) and the database connection object (conn)
+
+
+iTunes_songs(lst)
+- takes a list of the artist's names on the Billboard artist 100 as input
+- creates a JSON object of the Songs in an iTunes Search for each artist's SONGS ONLY (up to 25 songs per artist)
+- returns a list whose items are each a JSON formatted data structure of the iTunes search for the songs of every artist on the Billboard 100
+
+iTunes_albums(lst):
+- takes a list of the artist's names on the Billboard artist 100 as input
+- creates a JSON object of the Albums in an iTunes Search for each artist's ALBUMS ONLY (up to 25 albums per artist)
+- returns a list whose items are each a JSON formatted data structure of the iTunes search for the albums of every artist on the Billboard 100
+
+songs_table(cur, conn, lst)
+- takes in the database cursor object, the database connection object, and the list of artists names on the Billboard Artist 100 as inputs
+- saves data from songs-only iTunes searches to a table called Songs
+- the table has 4 columns- the song title, the album title, the artist's name, and the song's numeric id within iTunes
+- returns nothing
+
+albums_table(cur, conn, lst)
+- takes in the database cursor object, the database connection object, and the list of artists names on the Billboard Artist 100 as inputs
+- saves data from albums-only iTunes searches to a table called Albums
+- the table has 3 columns- the album title, the artist's name, and the album's numeric id within iTunes
+- returns nothing
+
+artist_weeks(cur, conn)
+- takes in the database cursor object and the database connection object as inputs
+- Scrapes the artists' names and the number of weeks they have been on the Billboard Artist 100 from the Billboard Website, and saves it to a table called 
+  artistWeeks
+- returns nothing
 
 ## Specfic tasks completed
 - [ ] Accessed at least 2 APIs or 1 API and 1 Website
