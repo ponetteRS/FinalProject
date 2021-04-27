@@ -132,7 +132,6 @@ def iTunes_albums(artist):
 def artist_weeks(cur, conn):
     cur.execute("CREATE TABLE IF NOT EXISTS artistWeeks (artist TEXT PRIMARY KEY, num_weeks INTEGER)")
     count = 0
-    cur.execute("SELECT num_weeks FROM artistWeeks") #CHECK THE SELECT STATEMENT
     
     url = 'https://www.billboard.com/charts/artist-100'
     r = requests.get(url)
@@ -152,7 +151,6 @@ def artist_weeks(cur, conn):
                 artist= ar.text.strip()
                 temp = stats_row[2].text
                 num_weeks = temp.split()[0] #number of weeks on the billboard
-                # cur.execute("INSERT OR IGNORE INTO artistWeeks (artist, num_weeks) VALUES (?, ?)", (artist, num_weeks))
                 if cur.execute("SELECT artist AND num_weeks FROM artistWeeks WHERE artist = ? AND num_weeks = ?", (artist, num_weeks,)).fetchone() == None:
                     cur.execute("INSERT INTO artistWeeks (artist, num_weeks) VALUES (?,?)", (artist, num_weeks))
                     count += 1
