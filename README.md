@@ -31,6 +31,7 @@ Everything should be set up when the files are downloaded. To run the code, simp
 ## Code Documentation
 
 
+
 ## Specfic tasks completed
 - [ ] Accessed at least 2 APIs or 1 API and 1 Website
 - [ ] Store at least 100 items (rows) in at least one table per API/website
