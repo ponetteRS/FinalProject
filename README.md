@@ -44,13 +44,13 @@ setUpDatabase(db_name)
 
 
 iTunes_songs(lst)
-- takes a list of the artist's names on the Billboard artist 100 as input
+- takes in a list of the names of the top 10 artists on the Billboard Artist 100 as input
 - creates a JSON object of the Songs in an iTunes Search for each artist's SONGS ONLY (up to 25 songs per artist)
 - returns a list whose items are each a JSON formatted data structure of the iTunes search for the songs of every artist on the Billboard 100
 
 
 iTunes_albums(lst):
-- takes a list of the artist's names on the Billboard artist 100 as input
+- takes a list of the names of the top 10 artists on the Billboard Artist 100 as input
 - creates a JSON object of the Albums in an iTunes Search for each artist's ALBUMS ONLY (up to 25 albums per artist)
 - returns a list whose items are each a JSON formatted data structure of the iTunes search for the albums of every artist on the Billboard 100
 
@@ -94,6 +94,10 @@ most_music(cur,conn)
 - writes all of the calculations to the Music_Calculations.csv file
 - returns a dictionary of each album in the Albums table with songs in the Songs table as keys and the number of songs that album has in the Songs table as values
 
+main()
+-takes in no inputs
+-calls every function we created, with the specified inputs stated above
+-returns nothing
 
 ## Specfic tasks completed
 - [ ] Accessed at least 2 APIs or 1 API and 1 Website
