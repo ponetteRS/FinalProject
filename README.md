@@ -112,3 +112,16 @@ Date | Issue Description | Location of Resource | Result |
 4/22 | struggling to figure out what graph to use for calculations done from data collected from iTunes API | Office Hours w/ Ashley | Issue resolved- decided to re-do calculations to create data that would suit a scatterplot |
 4/25 | struggling to limit uploads to each table to be 25 rows at a time | https://umich.instructure.com/courses/423279/files/folder/Slides/Lecture%2021%20-%20Example%20Projects?preview=20261393 (lecture slides- ProjectEXwithVis-v6.pdf)| issue NOT resolved- still could not figure out limit 25 constraint |
 4/26 | Could not scrape info from Genius Webpage; Struggling to figure out Limit 25 table constraint | Office Hours w/ AJ | Issue resolved- Opted to use Billboard Website instead of Genius, limited table uploads to be 25 at a time successfully | 
+
+
+Vizualizations:
+* NOTE: The Billboard Artist 100 is updated daily. As a result, it is likely that the datapoints on the vizualizations would be different than the ones shown here if you were to run our code again *
+
+iTunes API Scatterplot:
+<img width="1032" alt="Screen Shot 2021-04-27 at 6 30 46 PM" src="https://user-images.githubusercontent.com/78374312/116325448-2e5e6700-a790-11eb-894d-9350eae09f7c.png">
+
+Billboard Website Pie Chart:
+<img width="996" alt="Screen Shot 2021-04-27 at 6 31 49 PM" src="https://user-images.githubusercontent.com/78374312/116325519-5948bb00-a790-11eb-90d0-d8fecbbcda46.png">
+
+Billboard Website EXTRA CREDIT Pie Chart:
+<img width="994" alt="Screen Shot 2021-04-27 at 6 31 27 PM" src="https://user-images.githubusercontent.com/78374312/116325501-5221ad00-a790-11eb-9499-f0ca2d767433.png">
