@@ -137,14 +137,27 @@ def artist_weeks(cur, conn):
 
 # returns dictionary of top 10 artists as keys and weeks as values to be used in pie
 def top_ten():
-    cur.execute('SELECT artist AND num_weeks FROM artistweeks ORDER BY num_weeks DESC') 
-    all_artists = cur.fetchall()
+    url = 'https://www.billboard.com/charts/artist-100'
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, 'html.parser')
+    d = {}
     top = {}
-    i = 0 
-    for artist in all_artists[:10]:
-        top = top.get(artist, 0) + artist[i]
-        i += 1
-    return top
+    data = soup.find('div', class_ = 'chart-details')
+    rows = data.find_all('div', class_  = "chart-list-item")
+
+    for row in rows:
+         artist_row = row.find_all('span', class_ = "chart-list-item__title-text")
+         stats_row = row.find_all('div', class_ = "chart-list-item__ministats-cell")
+
+         for ar in artist_row[:10]:
+             artist= ar.text.strip()
+             temp = stats_row[2].text
+             num_weeks = temp.split()[0] #number of weeks on the billboard
+             d[artist] = d.get(artist, 0) + int(num_weeks)
+    temp_d = sorted(d.items(), key=lambda x:x[1], reverse=True)
+    # for key in temp_d:
+    #     top[key] = temp_d[key]
+    return temp_d[:10]
 
 #Create a scatterplot of the number of songs in the Songs table that are on albums in the Albums table
 def scatterplot(data):
@@ -165,16 +178,16 @@ def scatterplot(data):
 
 # 
 def pie():
-    d = top_ten()
+    tup_lst = top_ten()
     artists = []
     values = []
     i = 0 
-    for key in d: #creates two data lists needed for visualization
-        artists.append(key)
-        values.append(key[i])
+    for tup in tup_lst: #creates two data lists needed for visualization
+        artists.append(tup[0])
+        values.append(tup[1])
         i += 1
     # Creating explode data
-    explode = (0.2, 0.0, 0.0, 0.0, 0.0, 0.0)
+    explode = (0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 
     # Creating color parameters
     colors = ( "orange", "cyan", "brown", "grey", "indigo", "beige", "cyan", "brown", "grey", "indigo")
@@ -185,7 +198,7 @@ def pie():
     # Creating autocpt arguments
     def func(pct, allvalues):
         absolute = int(pct / 100.*np.sum(allvalues))
-        return "{:.1f}%\n({:d} g)".format(pct, absolute)
+        return "{:.1f}%\n({:d} weeks)".format(pct, absolute)
     
     # Creating plot
     fig, ax = plt.subplots(figsize =(10, 7))
@@ -197,18 +210,18 @@ def pie():
                                     colors = colors,
                                     startangle = 90,
                                     wedgeprops = wp,
-                                    textprops = dict(color ="magenta"))
+                                    textprops = dict(color ="black"))
     # Adding legend
     ax.legend(wedges, artists,
             title ="Artists",
             loc ="center left",
-            bbox_to_anchor =(1, 0, 0.5, 1))
+            bbox_to_anchor =(1.1, 0, 0.5, 1))
     
     plt.setp(autotexts, size = 8, weight ="bold")
-    ax.set_title("Pie chart of artists and number of weeks on charts")
+    ax.set_title("Artist Dominance Based on Weeks on Charts (Top 10)")
     # show plot
     plt.show()
-    
+
 #Of the 10 most popular artists calculate the number of songs from the Songs table that are on 
 #albums in the Albums table. If there are no songs in the songs table on an album in the albums table, that album is ignored.
 #These calculations are solely meant to measure when there is overlap between the 2 tables.  
@@ -247,8 +260,11 @@ def main():
     # albums_table(cur, conn, albums)
     # music_data = most_music(cur, conn)
     # scatterplot(music_data)
-    artist_weeks(cur, conn)
+    # artist_weeks(cur, conn)
     # print(top_ten())
+    # p = top_ten()
+    pie()
+    
 
 
 if __name__ == "__main__":
