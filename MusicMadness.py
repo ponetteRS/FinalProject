@@ -258,7 +258,7 @@ def most_music(cur, conn):
             music_data[music[i][2]] = music_data.get(music[i][2], 0) + 1
         else:
             continue
-    cur.execute("SELECT artist, num_weeks FROM artistWeeks WHERE num_weeks ORDER BY num_weeks DESC")
+    cur.execute("SELECT artist, num_weeks FROM artistWeeks ORDER BY num_weeks DESC")
     top_lst = cur.fetchall()
     average = 0
     s = 0
