@@ -96,7 +96,7 @@ def albums_table(cur, conn, lst):
 
 # Get the artists names and the number of weeks they have been on the Billboard Artist 100, and save that to a table called artistWeeks
 def artist_weeks(cur, conn):
-    # cur.execute("CREATE TABLE IF NOT EXISTS artistWeeks (artist TEXT PRIMARY KEY, num_weeks INTEGER)")
+    
     cur.execute("CREATE TABLE IF NOT EXISTS artistWeeks (artist TEXT PRIMARY KEY, num_weeks INTEGER)")
     count = 0
     
@@ -276,14 +276,7 @@ def most_music(cur, conn):
             f.write(tup[0] + " has " + str(tup[1]) + ' weeks on Billboard compared to ' + str(average) + ' the top 10 average \n')   
     f.close()
     return music_data  
-# Tests for artist_weeks()
-# print(artist_weeks())
 
-# artist_weeks()
-# print(top_ten()) 
-
-print(top_ten())
-    # p = top_ten()
 
 def main():
     #creating filename
@@ -294,8 +287,8 @@ def main():
     albums = iTunes_albums(list_of_artists[:10]) 
     songs_table(cur, conn, songs)
     albums_table(cur, conn, albums)
-    music_data = most_music(cur, conn)
     artist_weeks(cur, conn) #move to back if neccesary
+    music_data = most_music(cur, conn)
     scatterplot(music_data)
     pie()
     pie_two(music_data)
