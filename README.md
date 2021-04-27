@@ -16,5 +16,6 @@ From the Genius Lyrics Website, we will calculate which of the 100 artists has t
 - [ ] Limited the amount of data to 25 collected/stored at a time up to the first 100
 - [ ] Selected items from all the tables and calculated something from the data (average, counts, etc)
 - [ ] Database join used at least once in selecting the items
+- [ ] Write a well-formatted, self explanatory file from the calculations (JSON, csv or text file)
 - [ ] Visualization (2 for 2 persons in a team, 3 for 3 persons in a team)
 
