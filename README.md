@@ -78,14 +78,6 @@ artist_weeks()
 top_ten()
 - TO BE FIXED- THIS IS WHERE MISTAKEN CALCULATIONS BEGIN
 
-scatterplot()
-- takes in what is returned from most_music() (a dictionary of each album in the albums table, and the number of songs it has in the songs table (if that is more than 0)) as input
-- creates a scatterplot of the number of songs in the Songs table that are on albums in the Albums table
-
-pie()
-- has no inputs
-- creates a pie chart of the number of weeks the top ten artists currently on the Billboard Artist 100 Charts have remained on the Billboard Artist 100 Charts 
-
 most_music()
 - takes in the database cursor object and the database connection object as inputs
 - calculates the number of songs from the Songs table that are on albums in the Albums table (if there are no songs in the songs table on an album in the albums  
@@ -93,6 +85,14 @@ most_music()
 - also calculates the average number of weeks an artist has been on the Billboard Artist 100 charts, as well as the actual number of weeks each artist has been on the Artist 100 charts
 - writes all of the calculations to the Music_Calculations.csv file
 - returns a dictionary of each album in the Albums table with songs in the Songs table as keys and the number of songs that album has in the Songs table as values
+
+scatterplot()
+- takes in what is returned from most_music() (a dictionary of each album in the albums table, and the number of songs it has in the songs table (if that is more than 0)) as input
+- creates a scatterplot of the number of songs in the Songs table that are on albums in the Albums table
+
+pie()
+- has no inputs
+- creates a pie chart of the number of weeks the top ten artists currently on the Billboard Artist 100 Charts have remained on the Billboard Artist 100 Charts 
 
 main()
 - takes in no inputs
