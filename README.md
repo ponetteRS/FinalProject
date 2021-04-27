@@ -101,7 +101,7 @@ main()
 
 Resources Used:
 
-Date: | Issue Description | Location of Resource | Result | 
+Date | Issue Description | Location of Resource | Result | 
 ----- | ----------------- | -------------------- | -------|
 4/22 | struggling to figure out how to make labels fit size constraints for a matplotlib scatterplot |https://stackoverflow.com/questions/332289/how-do-you-change-the-size-of-figures-drawn-with-matplotlib | labeling issue resolved; margins still to be figured out | 
 4/22 | struggling to figure out what graph to use for calculations done from data collected from iTunes API | Office Hours w/ Ashley | Issue resolved- decided to re-do calculations to creata data that would suit a scatterplot |
