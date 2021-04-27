@@ -1,7 +1,9 @@
 ## FinalProject
 
-## Initial Project Goals and Issues Faced
-Our project goals have changed significantly since the project began. Initially, our goals were to gather data from the iTunes API, to gather information from the Genius Lyrics Website, to calculate the artist with the most songs and albums on iTunes, to calculate the most "popular" artist on Genius (based on the number of likes on their Genius page), and to then then to compare these data points to see if the most popular artists on Genius also had the largest iTunes discographies. Unfortunately, we faced many issues when trying to reach these goals: we were unable to scrape the likes off of the Genius Lyrics website using BeautifulSoup, and the calculations we had planned to do for the iTunes API were not useful for making any charts or graphs, so we had to change our project goals. 
+## Initial Project Goals and Problems Faced
+Our project goals have changed significantly since the project began. Initially, our goals were to gather data from the iTunes API, to gather information from the Genius Lyrics Website, to calculate the artist with the most songs and albums on iTunes, to calculate the most "popular" artist on Genius (based on the number of likes on their Genius page), and to then then to compare these data points to see if the most popular artists on Genius also had the largest iTunes discographies. 
+
+Unfortunately, we faced many issues when trying to reach these goals: we were unable to scrape the likes off of the Genius Lyrics website using BeautifulSoup, and the calculations we had planned to do for the iTunes API were not useful for making any charts or graphs, so we had to change our project goals. 
 
 ## Final Project Goals
 After lots of troubleshooting and research, our project goals were as follows:
@@ -19,6 +21,14 @@ From the Billboard Website, Our Goals Were:
 - To create a database table of this information
 - To use this information to create a pie chart of the top 10 artists and the number of weeks they had remained on the charts
 - To use this information to create a second pie chart, this time of the ......
+
+## Instructions for Running the Code
+Everything should be set up when the files are downloaded. To run the code, simply:
+1. Hit the play button- this will upload the first 25 rows to the database and produce our 3 vizualizations
+2. Hit the play button 3 more times- each time this is done, 25 new rows of unique data will be uploaded to each table. After running th code a total of 4 times, there should be 100 rows in each table.
+3. After the code has been ran 4 times, our csv file (INSERT NAME HERE) will be fully populated, and will match the csv we turned in in our Zip file project submission.
+
+## Code Documentation
 
 
 ## Specfic tasks completed
