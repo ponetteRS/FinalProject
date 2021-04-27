@@ -104,6 +104,6 @@ Resources Used:
 Date | Issue Description | Location of Resource | Result | 
 ----- | ----------------- | -------------------- | -------|
 4/22 | struggling to figure out how to make labels fit size constraints for a matplotlib scatterplot |https://stackoverflow.com/questions/332289/how-do-you-change-the-size-of-figures-drawn-with-matplotlib | labeling issue resolved; margins still to be figured out | 
-4/22 | struggling to figure out what graph to use for calculations done from data collected from iTunes API | Office Hours w/ Ashley | Issue resolved- decided to re-do calculations to creata data that would suit a scatterplot |
+4/22 | struggling to figure out what graph to use for calculations done from data collected from iTunes API | Office Hours w/ Ashley | Issue resolved- decided to re-do calculations to create data that would suit a scatterplot |
 4/25 | struggling to limit uploads to each table to be 25 rows at a time | https://umich.instructure.com/courses/423279/files/folder/Slides/Lecture%2021%20-%20Example%20Projects?preview=20261393 (lecture slides- ProjectEXwithVis-v6.pdf)| issue NOT resolved- still could not figure out limit 25 constraint |
 4/26 | Could not scrape info from Genius Webpage; Struggling to figure out Limit 25 table constraint | Office Hours w/ AJ | Issue resolved- Opted to use Billboard Website instead of Genius, limited table uploads to be 25 at a time successfully | 
