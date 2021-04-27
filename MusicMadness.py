@@ -282,7 +282,7 @@ def main():
     #creating filename
     path = os.path.dirname(os.path.realpath(__file__))
     list_of_artists = billboard_list()
-    cur, conn = setUpDatabase('Music.db') 
+    cur, conn = setUpDatabase('Muse.db') 
     songs = iTunes_songs(list_of_artists[:10])
     albums = iTunes_albums(list_of_artists[:10]) 
     songs_table(cur, conn, songs)
