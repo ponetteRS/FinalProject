@@ -321,7 +321,7 @@ def main():
     #creating filename
     path = os.path.dirname(os.path.realpath(__file__))
     list_of_artists = billboard_list()
-    cur, conn = setUpDatabase('Test.db') #change this to be named Music on final file
+    cur, conn = setUpDatabase('Music.db') #change this to be named Music on final file
     songs = iTunes_songs(list_of_artists[:10])
     albums = iTunes_albums(list_of_artists[:10]) 
     songs_table(cur, conn, songs)
