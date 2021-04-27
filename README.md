@@ -102,6 +102,6 @@ main()
 Resources Used:
 
 Date: | Issue Description | Location of Resource | Result | 
---- | --- | --- | --- |--- 
+----- | ----------------- | -------------------- | -------|
 4/22 | struggling to figure out how to make labels fit size constraints for a matplotlib scatterplot |https://stackoverflow.com/questions/332289/how-do-you-change-the-size-of-figures-drawn-with-matplotlib | labeling issue resolved; margins still to be figured out | 
 4/26 | Could not scrape info from Genius Webpage; Struggling to figure out Limit 25 table constraint | Office Hours w/ AJ | Issue Resolved | 
