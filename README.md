@@ -36,40 +36,40 @@ billboard_list()
 - returns a list of all the artist's names on the Billboard Artist 100 Website
 
 
-setUpDatabase(db_name)
+setUpDatabase()
 - takes the name of a database as input
 - creates the database
 - returns the database cursor (cur) and the database connection object (conn)
 
 
 
-iTunes_songs(lst)
+iTunes_songs()
 - takes in a list of the names of the top 10 artists on the Billboard Artist 100 as input
 - creates a JSON object of the Songs in an iTunes Search for each artist's SONGS ONLY (up to 25 songs per artist)
 - returns a list whose items are each a JSON formatted data structure of the iTunes search for the songs of every artist on the Billboard 100
 
 
-iTunes_albums(lst):
+iTunes_albums()
 - takes a list of the names of the top 10 artists on the Billboard Artist 100 as input
 - creates a JSON object of the Albums in an iTunes Search for each artist's ALBUMS ONLY (up to 25 albums per artist)
 - returns a list whose items are each a JSON formatted data structure of the iTunes search for the albums of every artist on the Billboard 100
 
 
-songs_table(cur, conn, lst)
+songs_table()
 - takes in the database cursor object, the database connection object, and the list of artists names on the Billboard Artist 100 as inputs
 - saves data from songs-only iTunes searches to a table called Songs
 - the table has 4 columns- the song title, the album title, the artist's name, and the song's numeric id within iTunes
 - returns nothing
 
 
-albums_table(cur, conn, lst)
+albums_table()
 - takes in the database cursor object, the database connection object, and the list of artists names on the Billboard Artist 100 as inputs
 - saves data from albums-only iTunes searches to a table called Albums
 - the table has 3 columns- the album title, the artist's name, and the album's numeric id within iTunes
 - returns nothing
 
 
-artist_weeks(cur, conn)
+artist_weeks()
 - takes in the database cursor object and the database connection object as inputs
 - Scrapes the artists' names and the number of weeks they have been on the Billboard Artist 100 from the Billboard Website, and saves it to a table called 
   artistWeeks
@@ -78,7 +78,7 @@ artist_weeks(cur, conn)
 top_ten()
 - TO BE FIXED- THIS IS WHERE MISTAKEN CALCULATIONS BEGIN
 
-scatterplot(data)
+scatterplot()
 - takes in what is returned from most_music() (a dictionary of each album in the albums table, and the number of songs it has in the songs table (if that is more than 0)) as input
 - creates a scatterplot of the number of songs in the Songs table that are on albums in the Albums table
 
@@ -86,7 +86,7 @@ pie()
 - has no inputs
 - creates a pie chart of the number of weeks the top ten artists currently on the Billboard Artist 100 Charts have remained on the Billboard Artist 100 Charts 
 
-most_music(cur,conn)
+most_music()
 - takes in the database cursor object and the database connection object as inputs
 - calculates the number of songs from the Songs table that are on albums in the Albums table (if there are no songs in the songs table on an album in the albums  
   table, that album is ignored: these calculations are solely meant to measure when there is overlap between the 2 tables.) (ie. calculates the overlap between a search for an artist's songs on iTunes and searches for that artist's albums on iTunes).
