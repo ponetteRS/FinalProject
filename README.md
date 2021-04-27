@@ -94,6 +94,10 @@ pie()
 - has no inputs
 - creates a pie chart of the number of weeks the top ten artists currently on the Billboard Artist 100 Charts have remained on the Billboard Artist 100 Charts 
 
+pie_two(data)
+- takes in the output of the function most_music(cur, conn)
+- creates a pie chart of the number of the albums in relation to the number of songs
+
 main()
 - takes in no inputs
 - calls every function we created, with the specified inputs stated above
