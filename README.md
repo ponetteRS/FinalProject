@@ -76,9 +76,7 @@ artist_weeks()
 - returns nothing
 
 top_ten()
-- Used BeautifulSoup to scrape the Billboard Hot 100 website
-- Scrapes the artists' names and the number of weeks they have been on the Billboard Artist 100 from the Billboard Website, and saves it to a dictionary
-- returns a dictionary used for the pie chart visualization
+- TO BE FIXED- THIS IS WHERE MISTAKEN CALCULATIONS BEGIN
 
 most_music()
 - takes in the database cursor object and the database connection object as inputs
@@ -101,13 +99,10 @@ main()
 - calls every function we created, with the specified inputs stated above
 - returns nothing
 
-## Specfic tasks completed
-- [x] Accessed at least 2 APIs or 1 API and 1 Website
-- [x] Store at least 100 items (rows) in at least one table per API/website
-- [x] Have at least 1 table per API/website. At least 1 API/website must have 2 tables that share a key.
-- [x] Limited the amount of data to 25 collected/stored at a time up to the first 100
-- [x] Selected items from all the tables and calculated something from the data (average, counts, etc)
-- [x] Database join used at least once in selecting the items
-- [x] Write a well-formatted, self explanatory file from the calculations (JSON, csv or text file)
-- [x] Visualization (2 for 2 persons in a team, 3 for 3 persons in a team)
+Resources Used:
 
+Date: | Issue Description | Location of Resource | Result | 
+----- | ----------------- | -------------------- | -------|
+4/22 | struggling to figure out how to make labels fit size constraints for a matplotlib scatterplot |https://stackoverflow.com/questions/332289/how-do-you-change-the-size-of-figures-drawn-with-matplotlib | labeling issue resolved; margins still to be figured out | 
+4/22 | struggling to figure out what graph to use for calculations done from data collected from iTunes API | Office Hours w/ Ashley | Issue resolved- decided to re-do calculations to creata data that would suit a scatterplot |
+4/26 | Could not scrape info from Genius Webpage; Struggling to figure out Limit 25 table constraint | Office Hours w/ AJ | Issue resolved- Opted to use Billboard Website instead of Genius | 
