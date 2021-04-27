@@ -95,29 +95,6 @@ def albums_table(cur, conn, lst):
 #if cur.execute("SELECT album_title AND artist FROM Albums WHERE album_title = ? AND artist = ?", (album, artist)) == None:
 
 
-#Of the 10 most popular artists on Genius, calculate the number of songs from the Songs table that are on 
-#albums in the Albums table. If there are no songs in the songs table on an album in the albums table, that album is ignored.
-#These calculations are solely meant to measure when there is overlap between the 2 tables.  
-def most_music(cur, conn):
-
-    cur.execute("SELECT Songs.artist, Songs.song_title, Albums.album_title FROM Songs JOIN Albums WHERE Songs.album = Albums.album_title")
-    music = cur.fetchall()
-
-    music_data = {}
-    for i in range(len(music)):
-        if music[i-1][2] == music[i][2]:
-            music_data[music[i][2]] = music_data.get(music[i][2], 0) + 1
-        else:
-            continue
-
-    with open('iTunes.csv','w') as f:
-        f.write('Of the albums in the Albums table: \n\n')
-        for album in music_data.items():
-            f.write(album[0] + " has " + str(album[1]) + ' song(s) in the Songs table \n')
-            
-    f.close()
-    return music_data
-
 
 #Creates JSON object of up to 10 albums per artist
 def iTunes_albums(artist):
@@ -232,6 +209,28 @@ def pie():
     # show plot
     plt.show()
     
+#Of the 10 most popular artists calculate the number of songs from the Songs table that are on 
+#albums in the Albums table. If there are no songs in the songs table on an album in the albums table, that album is ignored.
+#These calculations are solely meant to measure when there is overlap between the 2 tables.  
+def most_music(cur, conn):
+
+    cur.execute("SELECT Songs.artist, Songs.song_title, Albums.album_title FROM Songs JOIN Albums WHERE Songs.album = Albums.album_title")
+    music = cur.fetchall()
+
+    music_data = {}
+    for i in range(len(music)):
+        if music[i-1][2] == music[i][2]:
+            music_data[music[i][2]] = music_data.get(music[i][2], 0) + 1
+        else:
+            continue
+
+    with open('iTunes.csv','w') as f:
+        f.write('Of the albums in the Albums table: \n\n')
+        for album in music_data.items():
+            f.write(album[0] + " has " + str(album[1]) + ' song(s) in the Songs table \n')
+            
+    f.close()
+    return music_data  
 # Tests for artist_weeks()
 # print(artist_weeks())
 
