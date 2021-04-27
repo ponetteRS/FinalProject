@@ -155,8 +155,6 @@ def top_ten():
              num_weeks = temp.split()[0] #number of weeks on the billboard
              d[artist] = d.get(artist, 0) + int(num_weeks)
     temp_d = sorted(d.items(), key=lambda x:x[1], reverse=True)
-    # for key in temp_d:
-    #     top[key] = temp_d[key]
     return temp_d[:10]
 
 #Create a scatterplot of the number of songs in the Songs table that are on albums in the Albums table
@@ -236,12 +234,22 @@ def most_music(cur, conn):
             music_data[music[i][2]] = music_data.get(music[i][2], 0) + 1
         else:
             continue
+    # Gets an average of weeks from the top 10 most weeks on the charts
+    top = top_ten()
+    average = 0
+    s = 0
+    for item in top.items():
+        s += top[item]
+    average = s/10
 
     with open('iTunes.csv','w') as f:
         f.write('Of the albums in the Albums table: \n\n')
         for album in music_data.items():
-            f.write(album[0] + " has " + str(album[1]) + ' song(s) in the Songs table \n')
-            
+            f.write(album[0] + " has " + str(album[1]) + ' song(s) in the Songs table \n')  
+
+        f.write('Top 10 artists based on weeks on charts vs average weeks in the top 10: \n\n')
+        for artist in top.items():
+            f.write(artist + " has " + str(artist[0]) + ' week(s) on Billboard compared to ' + str(average) + ' the top 10 average \n')   
     f.close()
     return music_data  
 # Tests for artist_weeks()
@@ -250,19 +258,20 @@ def most_music(cur, conn):
 # artist_weeks()
 # print(top_ten()) 
 
+# print(top_ten())
+    # p = top_ten()
+
 def main():
     #creating filename
     path = os.path.dirname(os.path.realpath(__file__))
     cur, conn = setUpDatabase('iTunes.db') #change this to be named Music on final file
     songs = iTunes_songs(list_of_artists[:10])
-    # albums = iTunes_albums(list_of_artists[:10]) 
-    # songs_table(cur, conn, songs)
-    # albums_table(cur, conn, albums)
-    # music_data = most_music(cur, conn)
-    # scatterplot(music_data)
+    albums = iTunes_albums(list_of_artists[:10]) 
+    songs_table(cur, conn, songs)
+    albums_table(cur, conn, albums)
+    music_data = most_music(cur, conn)
+    scatterplot(music_data)
     # artist_weeks(cur, conn)
-    # print(top_ten())
-    # p = top_ten()
     pie()
     
 
