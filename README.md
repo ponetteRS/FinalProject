@@ -1,12 +1,22 @@
 ## FinalProject
 
-### Project Description
-We will be collecting information about the artists on the Billboard Artist 100 from the Genius Lyrics website and the iTunes API. We will scrape the Billboard artist 100 website to create a list of all 100 artists, and then will use that list to complete the rest of our project. 
+## Initial Project Goals and Issues Faced
+Our project goals have changed significantly since the project began. Initially, our goals were to gather data from the iTunes API and the Genius Lyrics Website in order to calculate the artist with the most songs and albums on iTunes, the most "popular" artist on Genius (based on the number of likes on their Genius page), and to then then to compare these data points to see if the most popular artists on Genius also had the largest iTunes discographies. Unfortunately, we were unable to scrape the likes off of the Genius Lyrics website using BeautifulSoup, and the calculations we had planned to do for the iTunes API were not useful for making any charts or graphs, so we had to change our project goals. 
 
-From the iTunes API, using the artists chosen above, we will be collecting their names, the number of songs they have on iTunes, and the number of albums they have on iTunes. In the database, we will use this information to calculate how many songs in the Songs table appear in each album in the Albums table. We will then create graphs of this information using the Matplotlib Data visualization package.
+## Final Project Goals
+After lots of troubleshooting and research, our project goals were as follows:
 
+From the iTunes API, Our Goals Were:
+-To test whether iTunes filters all their searches the same way, specifically: in a search for just songs, does iTunes simply return the top songs from the most popular albums, or is a different method used?
+  -To test this theory, we sought to find and calculate the overlap between iTunes searches for only songs and iTunes searches for only albums (using the iTunes API)
+  -To do this, our goal was to create 2 database tables: One of the data returned in an iTunes search for only an artist's songs, and another of the data returned in an iTunes search for only an artist's albums
+  -We then sought to make a scatterplot of the overlap between the searches, to see if any trends emerged
 
-From the Genius Lyrics Website, we will calculate which of the 100 artists has the most likes on their Genius page. This will be done by collecting the number of likes that artist got on their page/the number of likes the artist description on their page got and saving that to a database. We will then use that information to figure out which artist got the most likes. Using the Matplotlib Data visualization package, we will then create graphs of the artists with the most likes as well as a graph of the artist with most likes vs the artist with most songs, which will use information from both the iTunes and the Genius databases.
+From the Billboard Website, Our Goals Were:
+-To find the top 10 artists on the Billboard Artist 100 Charts, as well as how many weeks they had each been on the charts (using BeautifulSoup to scrape information from the Billboard website)
+-To create a database table of this information
+-To use this information to create a pie chart of the top 10 artists and the number of weeks they had remained on the charts
+-To use this information to create a second pie chart, this time of the ......
 
 
 ## Specfic tasks completed
