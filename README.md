@@ -76,7 +76,7 @@ artist_weeks()
 - returns nothing
 
 top_ten()
-- Used BeautifulSoup to scrape the Billboard Hot 100 website
+- uses BeautifulSoup to scrape the Billboard Hot 100 website
 - scrapes the artists' names and the number of weeks they have been on the Billboard Artist 100 from the Billboard Website, and saves it to a dictionary
 - returns a dictionary used for the pie chart visualizatio
 
