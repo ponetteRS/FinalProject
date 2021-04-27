@@ -95,9 +95,9 @@ most_music()
 - returns a dictionary of each album in the Albums table with songs in the Songs table as keys and the number of songs that album has in the Songs table as values
 
 main()
--takes in no inputs
--calls every function we created, with the specified inputs stated above
--returns nothing
+- takes in no inputs
+- calls every function we created, with the specified inputs stated above
+- returns nothing
 
 ## Specfic tasks completed
 - [ ] Accessed at least 2 APIs or 1 API and 1 Website
