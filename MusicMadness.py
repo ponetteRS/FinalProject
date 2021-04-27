@@ -9,8 +9,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Project artist: Music Madness
-# names: Ponette Rubio
-# names of Partners: Ponette Rubio and Jenny Siegel
+# Names of Partners: Ponette Rubio and Jenny Siegel
+
 def billboard_list():
     url = 'https://www.billboard.com/charts/artist-100'
     r = requests.get(url)
@@ -25,7 +25,7 @@ def billboard_list():
             lst.append(artist)
     return lst
 
-list_of_artists = billboard_list()
+
 # Create Database
 def setUpDatabase(db_name):
     path = os.path.dirname(os.path.abspath(__file__))
@@ -58,7 +58,7 @@ def iTunes_albums(lst):
 #Saves data from songs-only iTunes searches to a table called Songs
 #The table has 4 columns- the song title, the album title, the artist's name, and the song's numeric id within iTunes
 def songs_table(cur, conn, lst):
-    cur.execute("CREATE TABLE IF NOT EXISTS Songs (song_title TEXT, album TEXT, artist TEXT, id INTEGER PRIMARY KEY)")
+    cur.execute("CREATE TABLE IF NOT EXISTS Songs (song_title TEXT, album TEXT, artist TEXT, song_id INTEGER PRIMARY KEY)")
     count = 0
     for item in lst:
         for dct in item['results']:
@@ -70,14 +70,14 @@ def songs_table(cur, conn, lst):
                 artist = dct['artistName']
                 iTid = dct['trackId']
                 if cur.execute("SELECT song_title AND artist AND album FROM Songs WHERE song_title = ? AND artist = ? AND album = ?", (song, artist, album,)).fetchone() == None:
-                    cur.execute("INSERT INTO Songs (song_title, album, artist, id) VALUES (?,?,?,?)", (song, album, artist, iTid))
+                    cur.execute("INSERT INTO Songs (song_title, album, artist, song_id) VALUES (?,?,?,?)", (song, album, artist, iTid))
                     count += 1
     conn.commit()
 
 #Saves data from albums-only iTunes searches to a table called Albums
 #The table has 3 columns- the album title, the artist's name, and the album's numeric id within iTunes
 def albums_table(cur, conn, lst):
-    cur.execute("CREATE TABLE IF NOT EXISTS Albums (album_title TEXT, artist TEXT, id INTEGER PRIMARY KEY)")
+    cur.execute("CREATE TABLE IF NOT EXISTS Albums (album_title TEXT, artist TEXT, album_id INTEGER PRIMARY KEY)")
     count = 0
     for item in lst:
         for dct in item['results']:
@@ -88,24 +88,11 @@ def albums_table(cur, conn, lst):
                 album = dct['collectionName']
                 iTid = dct['collectionId']
                 if cur.execute("SELECT album_title AND artist FROM Albums WHERE album_title = ? AND artist = ?", (album, artist,)).fetchone() == None:
-                    cur.execute("INSERT INTO Albums (album_title, artist, id) VALUES (?,?,?)", (album, artist, iTid))
+                    cur.execute("INSERT INTO Albums (album_title, artist, album_id) VALUES (?,?,?)", (album, artist, iTid))
                     count += 1
     conn.commit()
-    
-#if cur.execute("SELECT album_title AND artist FROM Albums WHERE album_title = ? AND artist = ?", (album, artist)) == None:
 
-
-
-#Creates JSON object of up to 10 albums per artist
-def iTunes_albums(artist):
-    url= 'https://itunes.apple.com/search'
-    param= {'term': artist, 'entity': 'album', 'limit': '10'}  
-    iTunes= requests.get(url, params= param)
-    data= json.loads(iTunes.text)
-    return data
-#Saves album data to a database#
-
-# Get the artist on Billboard 100
+# Get the artists names and the number of weeks they have been on the Billboard Artist 100, and save that to a table called artistWeeks
 def artist_weeks(cur, conn):
     cur.execute("CREATE TABLE IF NOT EXISTS artistWeeks (artist TEXT PRIMARY KEY, num_weeks INTEGER)")
     count = 0
@@ -131,8 +118,6 @@ def artist_weeks(cur, conn):
                 if cur.execute("SELECT artist AND num_weeks FROM artistWeeks WHERE artist = ? AND num_weeks = ?", (artist, num_weeks,)).fetchone() == None:
                     cur.execute("INSERT INTO artistWeeks (artist, num_weeks) VALUES (?,?)", (artist, num_weeks))
                     count += 1
-            #  d[artist] = num_weeks #quick testing
-    # return d
     conn.commit()
 
 # returns dictionary of top 10 artists as keys and weeks as values to be used in pie
@@ -174,7 +159,7 @@ def scatterplot(data):
     plt.xticks(rotation = 90)
     plt.show()
 
-# 
+#Creates pie chart of the number of weeks the top ten artists have remained on the artist 100 charts 
 def pie():
     tup_lst = top_ten()
     artists = []
@@ -222,7 +207,8 @@ def pie():
 
 #Of the 10 most popular artists calculate the number of songs from the Songs table that are on 
 #albums in the Albums table. If there are no songs in the songs table on an album in the albums table, that album is ignored.
-#These calculations are solely meant to measure when there is overlap between the 2 tables.  
+#These calculations are solely meant to measure when there is overlap between the 2 tables. 
+# Also gets an average of weeks from the top 10 most weeks on the charts
 def most_music(cur, conn):
 
     cur.execute("SELECT Songs.artist, Songs.song_title, Albums.album_title FROM Songs JOIN Albums WHERE Songs.album = Albums.album_title")
@@ -234,7 +220,7 @@ def most_music(cur, conn):
             music_data[music[i][2]] = music_data.get(music[i][2], 0) + 1
         else:
             continue
-    # Gets an average of weeks from the top 10 most weeks on the charts
+    
     top = top_ten()
     average = 0
     s = 0
@@ -242,7 +228,7 @@ def most_music(cur, conn):
         s += top[item]
     average = s/10
 
-    with open('iTunes.csv','w') as f:
+    with open('Music_Calculations.csv','w') as f:
         f.write('Of the albums in the Albums table: \n\n')
         for album in music_data.items():
             f.write(album[0] + " has " + str(album[1]) + ' song(s) in the Songs table \n')  
@@ -258,20 +244,21 @@ def most_music(cur, conn):
 # artist_weeks()
 # print(top_ten()) 
 
-# print(top_ten())
+print(top_ten())
     # p = top_ten()
 
 def main():
     #creating filename
     path = os.path.dirname(os.path.realpath(__file__))
-    cur, conn = setUpDatabase('iTunes.db') #change this to be named Music on final file
+    list_of_artists = billboard_list()
+    cur, conn = setUpDatabase('Test.db') #change this to be named Music on final file
     songs = iTunes_songs(list_of_artists[:10])
     albums = iTunes_albums(list_of_artists[:10]) 
     songs_table(cur, conn, songs)
     albums_table(cur, conn, albums)
     music_data = most_music(cur, conn)
     scatterplot(music_data)
-    # artist_weeks(cur, conn)
+    artist_weeks(cur, conn)
     pie()
     
 
