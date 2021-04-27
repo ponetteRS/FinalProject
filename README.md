@@ -1,7 +1,7 @@
 ## FinalProject
 
 ## Initial Project Goals and Issues Faced
-Our project goals have changed significantly since the project began. Initially, our goals were to gather data from the iTunes API and the Genius Lyrics Website in order to calculate the artist with the most songs and albums on iTunes, the most "popular" artist on Genius (based on the number of likes on their Genius page), and to then then to compare these data points to see if the most popular artists on Genius also had the largest iTunes discographies. Unfortunately, we were unable to scrape the likes off of the Genius Lyrics website using BeautifulSoup, and the calculations we had planned to do for the iTunes API were not useful for making any charts or graphs, so we had to change our project goals. 
+Our project goals have changed significantly since the project began. Initially, our goals were to gather data from the iTunes API, to gather information from the Genius Lyrics Website, to calculate the artist with the most songs and albums on iTunes, to calculate the most "popular" artist on Genius (based on the number of likes on their Genius page), and to then then to compare these data points to see if the most popular artists on Genius also had the largest iTunes discographies. Unfortunately, we faced many issues when trying to reach these goals: we were unable to scrape the likes off of the Genius Lyrics website using BeautifulSoup, and the calculations we had planned to do for the iTunes API were not useful for making any charts or graphs, so we had to change our project goals. 
 
 ## Final Project Goals
 After lots of troubleshooting and research, our project goals were as follows:
