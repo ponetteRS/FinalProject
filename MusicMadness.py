@@ -11,7 +11,6 @@ import matplotlib.pyplot as plt
 # Project artist: Music Madness
 # names: Ponette Rubio
 # names of Partners: Ponette Rubio and Jenny Siegel
-
 def billboard_list():
     url = 'https://www.billboard.com/charts/artist-100'
     r = requests.get(url)
@@ -26,6 +25,7 @@ def billboard_list():
             lst.append(artist)
     return lst
 
+list_of_artists = billboard_list()
 # Create Database
 def setUpDatabase(db_name):
     path = os.path.dirname(os.path.abspath(__file__))
@@ -117,17 +117,7 @@ def most_music(cur, conn):
             
     f.close()
     return music_data
-    
-#Creates JSON object of up to 25 songs per artist
-def iTunes_songs(artist):
-    url= 'https://itunes.apple.com/search'
-    param= {'term': artist, 'entity': 'song', 'limit': '25'}  
-    iTunes= requests.get(url, params= param)
-    data= json.loads(iTunes.text)
-    return data
 
-#Saves song data to a database
-#def songs_table(cur, conn):
 
 #Creates JSON object of up to 10 albums per artist
 def iTunes_albums(artist):
@@ -137,10 +127,6 @@ def iTunes_albums(artist):
     data= json.loads(iTunes.text)
     return data
 #Saves album data to a database#
-
-list_of_artists = billboard_list()   
-#throughout the rest of the project, list_of_artists is the global variable for all 100 artists 
-    
 
 # Get the artist on Billboard 100
 def artist_weeks(cur, conn):
@@ -168,7 +154,7 @@ def artist_weeks(cur, conn):
                 num_weeks = temp.split()[0] #number of weeks on the billboard
                 # cur.execute("INSERT OR IGNORE INTO artistWeeks (artist, num_weeks) VALUES (?, ?)", (artist, num_weeks))
                 if cur.execute("SELECT artist AND num_weeks FROM artistWeeks WHERE artist = ? AND num_weeks = ?", (artist, num_weeks,)).fetchone() == None:
-                    cur.execute("INSERT INTO artistWeeks (artist, id) VALUES (?,?)", (artist, num_weeks))
+                    cur.execute("INSERT INTO artistWeeks (artist, num_weeks) VALUES (?,?)", (artist, num_weeks))
                     count += 1
             #  d[artist] = num_weeks #quick testing
     # return d
@@ -257,7 +243,6 @@ def pie():
 def main():
     #creating filename
     path = os.path.dirname(os.path.realpath(__file__))
-    list_of_artists = billboard_list() 
     cur, conn = setUpDatabase('iTunes.db') #change this to be named Music on final file
     songs = iTunes_songs(list_of_artists[:10])
     # albums = iTunes_albums(list_of_artists[:10]) 
