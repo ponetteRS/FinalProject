@@ -49,16 +49,16 @@ def iTunes_albums(artist):
     iTunes= requests.get(url, params= param)
     data= json.loads(iTunes.text)
     return data
-#Saves album data to a database
+#Saves album data to a database#
 
 list_of_artists = billboard_list()   
 #throughout the rest of the project, list_of_artists is the global variable for all 100 artists 
     
-
+test = 0
 # Get the artist on Billboard 100
 def artist_weeks():
     cur.execute("CREATE TABLE IF NOT EXISTS artistWeeks (artist TEXT PRIMARY KEY, num_weeks INTEGER)")
-    cur.execute("SELECT num_weeks FROM artistWeeks")
+    cur.execute("SELECT num_weeks FROM artistWeeks") #CHECK THE SELECT STATEMENT
     
     url = 'https://www.billboard.com/charts/artist-100'
     r = requests.get(url)
@@ -75,7 +75,7 @@ def artist_weeks():
              artist= ar.text.strip()
              temp = stats_row[2].text
              num_weeks = temp.split()[0] #number of weeks on the billboard
-             cur.execute("INSERT OR IGNORE INTO artistWeeks (artist, num_weeks) VALUES (?, ?)", (artist, weeks))
+             cur.execute("INSERT OR IGNORE INTO artistWeeks (artist, num_weeks) VALUES (?, ?)", (artist, num_weeks))
             #  d[artist] = num_weeks #quick testing
     # return d
     conn.commit()
