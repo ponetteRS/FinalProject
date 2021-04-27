@@ -32,7 +32,13 @@ def iTunes_songs(artist):
     iTunes= requests.get(url, params= param)
     data= json.loads(iTunes.text)
     return data
-    
+
+def setUpDatabase():
+    path = os.path.dirname(os.path.abspath(__file__))
+    conn = sqlite3.connect(path+'/'+ "finaldatabase.db")
+    cur = conn.cursor()
+    return cur, conn
+
 #Saves song data to a database
 #def songs_table(cur, conn):
 
@@ -59,71 +65,79 @@ def reformat(artist):
     #adds the - that url has
     reformatted_artist = reformatted_artist.replace(' ', '-')
     
+    return reformatted_artist
+    
 
 # Get the artist with most likes from Genius website from artists from billboard
 # This will be done by collecting the number of likes that artist got on their page/artist description
 def artist_likes():
-    artists_list = billboard_list() #list of artists from which to gather like data
-    url = 'https://genius.com/artists/'
-    likes_d = {}
-    #can order by when doing a select and just use database instead
+    # setUpDatabase() #temp until main merge
+    # cur.execute("CREATE TABLE IF NOT EXISTS artistsLikes (name TEXT PRIMARY KEY, likes INTEGER)")
+    # cur.execute("SELECT likes FROM artistsLikes")
     
-    for artist in artists_list:
-        try: # if requests.status_code = 200 -< do we need that if using a try and except?
-            url += reformat(artist) #adds artist name to the url ending in the Genius url format
-            r = requests.get(url)
-            soup = BeautifulSoup(r.text, 'html.parser')
-            data = soup.find('div', class_ = 'voting-total')
-            likes_d[artist] = data
-            #when we add to the database
-        except:
-            likes_d[artist] = 0 #artists not on Genius get no likes
- 
-    return likes_d
+    url = 'https://www.billboard.com/charts/artist-100'
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, 'html.parser')
+    d = {}
+    data = soup.find('div', class_ = 'chart-details')
+    rows = data.find_all('div', class_  = "chart-list-item")
 
-# from the dict of artists will get the most liked artist
-def most_likes():
-    d = sorted(artist_likes(), reverse = True) #dict from most likes to least likes
-    top = d[0]
-    return top
+    for row in rows:
+         artist_row = row.find_all('span', class_ = "chart-list-item__title-text")
+         stats_row = row.find_all('div', class_ = "chart-list-item__ministats-cell")
+
+         for ar in artist_row:
+             artist= ar.text.strip()
+             temp = stats_row[2].text
+             weeks = temp.split()[0] #number of weeks on the billboard
+             d[artist] = weeks #quick testing
+    return d
+   
+    # for artist in artists_list:
+    #     try: 
+    #         artist = str(reformat(artist))
+    #         temp_url = url + artist #adds artist name to the url ending in the Genius url format
+    #         # print(temp_url) #urls go to right website
+    #         r = requests.get(url)
+    #         soup = BeautifulSoup(r.text, 'html.parser')
+    #         data = soup.find('div', class_= 'voting-total square_button square_button--transparent voting-total--positive')
+    #         # print(data)
+        
+    #         likes_d[artist] = data #dict to see changes
+    #         # will import like information into the database
+    #         # cur.execute("INSERT OR IGNORE INTO artistsLikes (name, likes) VALUES (?, ?)", (name, likes))
+    #     except:
+    #         likes_d[artist] = 0 #artists not on Genius get no likes
+    # # conn.commit()
+    # return likes_d
 
 # returns list of top 10 artists
 def top_ten():
-    top_ten = []
-    ordered_artists_d = sorted(artist_likes(), reverse = True)
-    i = 0
-    
-    for artist in ordered_artists_d:
-        if i < 10:
-            top_ten.append(artist)
-            i += 1
-        else:
-            return top_ten
-
-    return top_ten
-
-# will import like information into the database
-def import_likes():
-    pass
+    cur.execute('SELECT text FROM artistLikes ORDER BY likes DESC') #none should self filter out
+    all_artists = cur.fetchall()
+    top = []
+    for artist in all_artists[:10]:
+        top.append(artist)
+    return top
 
 # creates 2 graphs from the Genius Lyrics info and iTunes database
 def graphics():
     pass
 
-#throughout the rest of the project, list_of_artists is the global variable for all 100 artists
-#def main(): 
-#    list_of_artists = billboard_list() 
-#    for artist in list_of_artists:
-#        songs = iTunes_songs(artist)
-#        albums = iTunes_albums(artist)
-
 
 # tests for reformat(artist)
 # reformatted_artist = 'Ariana Grande'
-# reformatted_artist = 'Rihanna'
+# # reformatted_artist = 'Rihanna'
 # reformatted_artist = reformatted_artist[0].upper() + reformatted_artist[1:].lower()
 # reformatted_artist = reformatted_artist.replace(' ', '-')
 # print(reformatted_artist)
 
+# Tests for rartist_likes()
 print(artist_likes())
+                            ######## calls to be added to main ########
+
+# setUpDatabase() #run when fixed scrape issue
+# artist_likes()
+# print(top_ten()) 
+
 
