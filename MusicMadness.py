@@ -160,11 +160,12 @@ def most_music(cur, conn):
         else:
             continue
     
-    top = top_ten()
+    cur.execute("SELECT artist, num_weeks FROM artistWeeks WHERE num_weeks ORDER BY num_weeks DESC")
+    top_lst = cur.fetchall()
     average = 0
     s = 0
-    for item in top.items():
-        s += top[item]
+    for tup in top_lst[:10]:
+         s += tup[1]
     average = s/10
 
     with open('Music_Calculations.csv','w') as f:
@@ -172,9 +173,9 @@ def most_music(cur, conn):
         for album in music_data.items():
             f.write(album[0] + " has " + str(album[1]) + ' song(s) in the Songs table \n')  
 
-        f.write('Top 10 artists based on weeks on charts vs average weeks in the top 10: \n\n')
-        for artist in top.items():
-            f.write(artist + " has " + str(artist[0]) + ' week(s) on Billboard compared to ' + str(average) + ' the top 10 average \n')   
+        f.write('\n\n\n\nTop 10 artists based on weeks on charts vs average weeks in the top 10: \n\n')
+        for tup in top_lst[:10]:
+            f.write(tup[0] + " has " + str(tup[1]) + ' weeks on Billboard compared to ' + str(average) + ' the top 10 average \n') 
     f.close()
     return music_data 
 
