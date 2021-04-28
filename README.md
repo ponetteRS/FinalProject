@@ -22,7 +22,7 @@ From the Billboard Website, Our Goals Were:
 - To find the top 10 artists on the Billboard Artist 100 Charts, as well as how many weeks they had each been on the charts (using BeautifulSoup to scrape information from the Billboard website)
 - To create a database table of this information
 - To use this information to create a pie chart of the top 10 artists and the number of weeks they had remained on the charts
-- To use this information to create a second pie chart, this time of the ......
+- To use this information to create a second pie chart, this time of the song-on-album overlap between the Songs and Albums tables
 
 ## Instructions for Running the Code
 Everything should be set up when the files are downloaded. To run the code, simply:
