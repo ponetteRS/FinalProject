@@ -5,6 +5,8 @@ Our project goals have changed significantly since the project began. Initially,
 
 Unfortunately, we faced many issues when trying to reach these goals: we were unable to scrape the likes off of the Genius Lyrics website using BeautifulSoup, and the calculations we had planned to do for the iTunes API were not useful for making any charts or graphs, so we had to change our project goals. 
 
+Also, we faced many issues while trying to merge our git commits together in the shared repository, which often resulted in us writing over each other’s code, and having to search through our commit history to remedy the deletions. This commit issue ultimately resulted in some troubles during our initial assigned presentation time, and we thank you all very much for being understanding and allowing us to present again.
+
 ## Final Project Goals
 After lots of troubleshooting and research, our project goals were as follows:
 
@@ -121,7 +123,7 @@ Date | Issue Description | Location of Resource | Result |
 iTunes API Scatterplot:
 <img width="1032" alt="Screen Shot 2021-04-27 at 6 30 46 PM" src="https://user-images.githubusercontent.com/78374312/116325448-2e5e6700-a790-11eb-894d-9350eae09f7c.png">
 
-Billboard Website Pie Chart:
+iTunes API Pie Chart:
 <img width="996" alt="Screen Shot 2021-04-27 at 6 31 49 PM" src="https://user-images.githubusercontent.com/78374312/116325519-5948bb00-a790-11eb-90d0-d8fecbbcda46.png">
 
 Billboard Website EXTRA CREDIT Pie Chart:
